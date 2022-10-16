@@ -1,0 +1,47 @@
+Home page - (endpoint /) this will help the user to navigate to the correct endpoint.
+Add Student - (/addstudent with GET and POST) this will help the user to register new student.
+Add Course - (/addcourse with GET and POST) this will help the user to register new course.
+Registration - (/addregistration with GET and POST) this will help the user to create the student to course relationship.
+Show Student - (/showstudents) this will give the user a view of registered students.
+Favicon - (/favicon) Favicon
+
+For debugging purposes
+/map endpoint that shows all the existing endpoints in the flask application.
+
+
+Code Structure :-
+
+
+@app.route('/favicon.ico')
+def favicon():
+    return app.send_static_file('favicon.ico')
+
+@app.route('/')
+def index(queryInfo = None):
+    # shows buttons/links to the pages.
+
+@app.route('/addstudent', methods = ['GET', 'POST'])
+def addstudent():
+    adds student with roll_no, student_name, dept_name, and email_id
+
+@app.route('/addcourse', methods = ['GET', 'POST'])
+def addcourse():
+    adds a course with course_cd, course_name, Semester, Credits, Instructor_Name
+    
+@app.route('/addregistration', methods = ['GET', 'POST'])
+def addregistration():
+    adds student with data from form as course_cd and roll_no.
+
+@app.route('/showstudents')
+def showstudents():
+    shows the student with their registered courses.
+
+@app.route("/map")
+def get_map():
+    data={}
+    for rule in app.url_map.iter_rules():
+        try:
+            data[str(rule.endpoint)]=str(url_for(rule.endpoint))
+        except:
+            pass
+    return data
