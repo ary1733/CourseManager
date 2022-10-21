@@ -9,7 +9,8 @@ import datetime
 app = Flask(__name__)
 
 # For Session
-app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+# app.config['SECRET_KEY'] = os.environ.get('SECRET_KEY')
+app.config['SECRET_KEY'] = "SomethingReallySecret
 app.config['SESSION_TYPE'] = 'memcached'
 
 @app.template_filter('formatdatetime')
