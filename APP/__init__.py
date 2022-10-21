@@ -39,6 +39,25 @@ def close_connection(exception):
 def index(queryInfo = None):
     return render_template('index.html')
 
+
+@app.route('/addcourse', methods = ['GET', 'POST'])
+def addcourse():
+    if request.method == 'POST':
+        data = request.json
+        print(data)
+        query_res = query_commit_db("""
+        INSERT INTO Course (Course_cd, Course_name, Semester, Credits, Instructor_Name)
+        VALUES
+        (?, ?, ?, ?, ?)
+        """,
+        (data.get('Course_cd'), data.get('Course_name'), data.get('Semester'), data.get('Credits'), data.get('Instructor_Name'))
+        ,
+        True)
+        return make_response(jsonify({"message": "success" if query_res == True else query_res}), 200)
+    else:
+        return render_template('addcourse.html')
+
+
 @app.route("/map")
 def get_map():
     data={}
